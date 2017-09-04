@@ -7,13 +7,16 @@
 ### 接入说明
 
 引入 library 库即可
+```
+compile 'com.cashow:cashowkeyboardmanager:1.0'
+```
 
 ### 获取软键盘的显示状态
 
-在 activity 的 onCreate() 和 onDestroy() 里加上如下代码：
+在 activity 的 onResume() 和 onPause() 里加上如下代码：
 ```java
 @Override
-protected void onCreate(Bundle savedInstanceState) {
+protected void onResume() {
    keyboardManager.addKeyboardHeightListener(this, new KeyboardListener() {
         @Override
         public void onShowKeyboard() {
@@ -28,7 +31,7 @@ protected void onCreate(Bundle savedInstanceState) {
 }
 
 @Override
-protected void onDestroy() {
+protected void onPause() {
    keyboardManager.removeKeyboardHeightListener();
 }
 ```

@@ -21,22 +21,17 @@ public class MainActivity extends AppCompatActivity implements KeyboardListener 
         text = (TextView) findViewById(R.id.text);
 
         keyboardManager = new KeyboardManager();
-        keyboardManager.addKeyboardHeightListener(this, new KeyboardListener() {
-            @Override
-            public void onShowKeyboard() {
-
-            }
-
-            @Override
-            public void onHideKeyboard() {
-
-            }
-        });
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onResume() {
+        super.onResume();
+        keyboardManager.addKeyboardHeightListener(this, this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
         keyboardManager.removeKeyboardHeightListener();
     }
 
