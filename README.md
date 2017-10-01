@@ -1,5 +1,60 @@
 # CashowKeyboardManager
 
+An android library to manage soft keyboard.
+
+[中文文档](https://github.com/cashow/CashowKeyboardManager#中文文档)
+
+### Getting started
+
+In your build.gradle:
+```
+compile 'com.cashow:cashowkeyboardmanager:1.0'
+```
+
+### Keyboard show / hide event
+
+Add below code to your activity：
+```java
+@Override
+protected void onResume() {
+   keyboardManager.addKeyboardHeightListener(this, new KeyboardListener() {
+        @Override
+        public void onShowKeyboard() {
+            // Called when keyboard is shown
+        }
+
+        @Override
+        public void onHideKeyboard() {
+            // Called when keyboard is hidden
+        }
+    });
+}
+
+@Override
+protected void onPause() {
+   keyboardManager.removeKeyboardHeightListener();
+}
+```
+
+### Get keyboard height
+
+After `onShowKeyboard()` is called，you can get keyboard height by calling `keyboardManager.getKeyboardHeight()`.
+
+`getKeyboardHeight()` returns -1 means get keyboard height failed.
+
+### Show and hide keyboard
+
+```java
+// show keyboard
+KeyboardManager.showSoftKeyBoard(activity, edittext);
+// hide keyboard
+KeyboardManager.hideSoftKeyBoard(activity, edittext);
+```
+
+--------
+
+## 中文文档
+
 这是一个用来控制android软键盘的库。
 
 详细说明请看：<http://cashow.github.io/android-get-keyboard-height.html>
