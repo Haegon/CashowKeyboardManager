@@ -8,10 +8,10 @@ An android library to manage soft keyboard.
 
 In your build.gradle:
 ```
-compile 'com.cashow:cashowkeyboardmanager:1.0'
+compile 'com.cashow:cashowkeyboardmanager:1.1'
 ```
 
-### Keyboard show / hide event
+### Keyboard show / hide callback
 
 Add below code to your activity：
 ```java
@@ -46,9 +46,19 @@ After `onShowKeyboard()` is called，you can get keyboard height by calling `key
 
 ```java
 // show keyboard
-KeyboardManager.showSoftKeyBoard(activity, edittext);
+keyboardManager.showSoftKeyBoard(edittext);
 // hide keyboard
+keyboardManager.hideSoftKeyBoard(edittext);
+
+// static method for show and hide keyboard
+KeyboardManager.showSoftKeyBoard(activity, edittext);
 KeyboardManager.hideSoftKeyBoard(activity, edittext);
+```
+
+### Get keyboard visibility
+
+```java
+keyboardManager.isShowKeyboard()
 ```
 
 --------
@@ -63,7 +73,7 @@ KeyboardManager.hideSoftKeyBoard(activity, edittext);
 
 引入 library 库即可
 ```
-compile 'com.cashow:cashowkeyboardmanager:1.0'
+compile 'com.cashow:cashowkeyboardmanager:1.1'
 ```
 
 ### 获取软键盘的显示状态
@@ -101,7 +111,17 @@ protected void onPause() {
 
 ```java
 // 显示软键盘
-KeyboardManager.showSoftKeyBoard(activity, edittext);
+keyboardManager.showSoftKeyBoard(edittext);
 // 隐藏软键盘
+keyboardManager.hideSoftKeyBoard(edittext);
+
+// 显示和隐藏软键盘的静态方法
+KeyboardManager.showSoftKeyBoard(activity, edittext);
 KeyboardManager.hideSoftKeyBoard(activity, edittext);
+```
+
+### 获取软键盘的显示状况
+
+```java
+keyboardManager.isShowKeyboard()
 ```

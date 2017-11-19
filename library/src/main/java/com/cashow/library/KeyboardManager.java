@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
+import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 
 public class KeyboardManager {
@@ -28,11 +29,14 @@ public class KeyboardManager {
 
     private KeyboardListener keyboardListener;
 
+    private WeakReference<Activity> activityWeakReference;
+
     public KeyboardManager() {
         keyboardHeight = -1;
     }
 
     public void addKeyboardHeightListener(Activity activity, KeyboardListener keyboardListener) {
+        activityWeakReference = new WeakReference<>(activity);
         statusBarHeight = getStatusBarHeight(activity);
         softButtonsBarHeight = getSoftButtonsBarHeight(activity);
         rootView = getRootFramelayout(activity);
@@ -54,6 +58,13 @@ public class KeyboardManager {
      */
     public int getKeyboardHeight() {
         return keyboardHeight;
+    }
+
+    /**
+     * 判断软键盘是否显示
+     */
+    public boolean isShowKeyboard() {
+        return isShowKeyboard;
     }
 
     private ViewTreeObserver.OnGlobalLayoutListener globalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -101,6 +112,24 @@ public class KeyboardManager {
             }
         }
     };
+
+    /**
+     * 显示软键盘
+     */
+    public void showSoftKeyBoard(EditText editText) {
+        if (activityWeakReference != null && activityWeakReference.get() != null) {
+            KeyboardManager.showSoftKeyBoard(activityWeakReference.get(), editText);
+        }
+    }
+
+    /**
+     * 隐藏软键盘
+     */
+    public void hideSoftKeyBoard(EditText editText) {
+        if (activityWeakReference != null && activityWeakReference.get() != null) {
+            KeyboardManager.hideSoftKeyBoard(activityWeakReference.get(), editText);
+        }
+    }
 
     /**
      * 显示软键盘
